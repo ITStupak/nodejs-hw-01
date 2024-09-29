@@ -2,18 +2,15 @@ import { createFakeContact } from '../utils/createFakeContact.js';
 import { readContacts } from '../utils/readContacts.js';
 import { writeContacts } from '../utils/writeContacts.js';
 
-const generateContacts = async (quantity) => {
+const generateContacts = async (number) => {
   try {
     const data = await readContacts();
-    const startData = JSON.parse(data);
-    console.log(startData);
     const newData = [];
-    for (let i = 0; i <= quantity; i++) {
-      const newContact = createFakeContact();
-      newData.push(newContact);
+    for (let i = 0; i < number; i++) {
+      newData.push(createFakeContact());
     }
-    const newDataArr = [...startData, ...newData];
-    await writeContacts(JSON.stringify(newDataArr));
+    const newDataArr = [...data, ...newData];
+    await writeContacts(newDataArr, undefined, 2);
   } catch (error) {
     console.log(error.message);
   }

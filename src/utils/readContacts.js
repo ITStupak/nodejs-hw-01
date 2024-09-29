@@ -3,7 +3,8 @@ import { PATH_DB } from '../constants/contacts.js';
 
 export const readContacts = async () => {
     try {
-        await fs.readFile(PATH_DB, { encoding: 'utf8', });
+        const data = await fs.readFile(PATH_DB, { encoding: 'utf8', });
+        return JSON.parse(data);
     } catch (error) {
         console.error(error);
     }
